@@ -6,9 +6,9 @@ import java.util.List;
  */
 public class General {
 
-    public static boolean customContains(ArrayList<Object> list, Object target) {
-        for (Object item : list) {
-            if (item.equals(target)) { // Utilise equals pour comparer chaque objet
+    public static <T> boolean customContains(ArrayList<T> list, T target) {
+        for (T item : list) {
+            if (item.equals(target)) { // Utilise equals pour comparer chaque élément
                 return true;
             }
         }
@@ -17,18 +17,18 @@ public class General {
 
     public static <T, E> ArrayList<T> convertArrayList(List<E> list, Class<T> clazz) {
         ArrayList<T> newList = new ArrayList<>();
-        
+
         for (E element : list) {
             if (clazz.isInstance(element)) { // Vérifie si l'élément est du type désiré
                 newList.add(clazz.cast(element)); // Cast dynamique et ajout à la nouvelle liste
             }
         }
-        
+
         return newList;
     }
 
-    public static <T,E> ArrayList<T> removeDouble(ArrayList<E> list, Class<T> class1){
-        ArrayList<T> objects= new ArrayList<>();
+    public static <T, E> ArrayList<T> removeDouble(ArrayList<E> list, Class<T> class1) {
+        ArrayList<T> objects = new ArrayList<>();
         // objects.add(class1.cast(list.getFirst()));
         for (Object li : list) {
             if (!objects.contains(class1.cast(li))) {
@@ -37,9 +37,9 @@ public class General {
         }
         return objects;
     }
-    
-    static String getOperation(int num) throws Exception{
-        String retour ="";
+
+    static String getOperation(int num) throws Exception {
+        String retour = "";
         switch (num) {
             case 1:
                 retour = "=";
@@ -59,7 +59,7 @@ public class General {
             case 6:
                 retour = "<=";
                 break;
-            
+
             default:
                 retour = "unreachable";
                 break;
@@ -94,56 +94,60 @@ public class General {
             throw new Exception("Object non numérisable");
         }
     }
-    
 
-    public static boolean operate(Object val1, int operation, Object val2){
+    public static boolean operate(Object val1, int operation, Object val2) {
         boolean status = false;
         switch (operation) {
             case 1:
-                if(val1.equals(val2)){
+                if (val1.equals(val2)) {
                     status = true;
                 }
                 break;
             case 2:
-                if(!val1.equals(val2)) status =true;
+                if (!val1.equals(val2))
+                    status = true;
                 break;
             case 3:
                 try {
-                    if(getIntValue(val2) > getIntValue(val2)) status =true;
+                    if (getIntValue(val2) > getIntValue(val2))
+                        status = true;
                 } catch (Exception e) {
                     status = false;
                 }
                 break;
             case 4:
                 try {
-                    if(getIntValue(val2) < getIntValue(val2)) status =true;
+                    if (getIntValue(val2) < getIntValue(val2))
+                        status = true;
                 } catch (Exception e) {
                     status = false;
                 }
                 break;
             case 5:
                 try {
-                    if(getIntValue(val2) >= getIntValue(val2)) status =true;
+                    if (getIntValue(val2) >= getIntValue(val2))
+                        status = true;
                 } catch (Exception e) {
                     status = false;
                 }
                 break;
             case 6:
                 try {
-                    if(getIntValue(val2) <= getIntValue(val2)) status =true;
+                    if (getIntValue(val2) <= getIntValue(val2))
+                        status = true;
                 } catch (Exception e) {
                     status = false;
                 }
                 break;
-        
+
             default:
-                status =false;
+                status = false;
                 break;
         }
         return status;
     }
 
-    public static <T, E> ArrayList<T> intersectArray(ArrayList<E> objects, ArrayList<E> objects2, Class<T> class1){
+    public static <T, E> ArrayList<T> intersectArray(ArrayList<E> objects, ArrayList<E> objects2, Class<T> class1) {
         ArrayList<T> inter = new ArrayList<>();
         for (Object object : objects) {
             if (objects2.contains(object)) {
@@ -171,9 +175,9 @@ public class General {
 
     public static String convertToString(Object obj) {
         if (obj == null) {
-            return "null";  // Si l'objet est null, renvoie "null"
+            return "null"; // Si l'objet est null, renvoie "null"
         }
-        return String.valueOf(obj);  // Utilise String.valueOf pour convertir l'objet
+        return String.valueOf(obj); // Utilise String.valueOf pour convertir l'objet
     }
-    
+
 }

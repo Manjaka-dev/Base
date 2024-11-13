@@ -25,5 +25,13 @@ public class Condition {
         return val;
     }
 
-    
+    @Override
+    public String toString() {
+        try {
+            return this.nomAtt + " " + General.getOperation(operation) + " " + val.toString();
+        } catch (Exception e) {
+            return "operation innexistante";
+        }
+    }
+
 }

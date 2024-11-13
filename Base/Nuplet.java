@@ -9,7 +9,7 @@ public class Nuplet {
     ArrayList<Atribut> atributs;
 
     public Nuplet(ArrayList<Atribut> atributs) {
-        this.values= new ArrayList<>();
+        this.values = new ArrayList<>();
         this.atributs = new ArrayList<>(atributs);
     }
 
@@ -25,17 +25,19 @@ public class Nuplet {
         return atributs;
     }
 
-    public boolean customEquals(Nuplet nuplet){
-        int count=0;
+    public boolean customEquals(Nuplet nuplet) {
+        int count = 0;
         for (int i = 0; i < this.values.size(); i++) {
-            if (this.values.get(i).equals(nuplet.values.get(i))) count ++;
+            if (this.values.get(i).equals(nuplet.values.get(i)))
+                count++;
         }
 
-        if (count == nuplet.values.size()) return true;
+        if (count == nuplet.values.size())
+            return true;
         return false;
     }
 
-    public void addValues(Object object, int numAt) throws Exception{
+    public void addValues(Object object, int numAt) throws Exception {
         if (this.atributs.get(numAt).checDomaine(object)) {
             this.values.add(object);
         } else {
@@ -43,30 +45,32 @@ public class Nuplet {
         }
     }
 
-    public static boolean nupletContains(ArrayList<Nuplet> nuplets, Nuplet nuplet){
-        if (nuplets.size() == 0) return false;
+    public static boolean nupletContains(ArrayList<Nuplet> nuplets, Nuplet nuplet) {
+        if (nuplets.size() == 0)
+            return false;
         for (Nuplet nuplet2 : nuplets) {
-            if (nuplet2.customEquals(nuplet)) return true;
+            if (nuplet2.customEquals(nuplet))
+                return true;
         }
         return false;
     }
 
-    public void showNuplet(){
+    public void showNuplet() {
         System.out.print("\n");
         for (Object value : values) {
-            System.out.print(value+"\t\t");
+            System.out.print(value + "\t\t");
         }
     }
 
-    public void showNuplet(int ligne){
+    public void showNuplet(int ligne) {
         System.out.print(this.values.get(ligne));
     }
 
-    public Object getLigne(int ligne){
+    public Object getLigne(int ligne) {
         return this.values.get(ligne);
     }
 
-    public int getNumLigne(Object object){
+    public int getNumLigne(Object object) {
         int index = General.indexOfGeneric(this.values, object);
         return index;
     }

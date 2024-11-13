@@ -9,8 +9,8 @@ public class Domaine {
     int typeDomaine; // vas de 1 a 4
     private ArrayList<String> tableType = new ArrayList<>();
 
-    public Domaine(ArrayList<String> doms, int typeDomaine) {
-        this.doms= new ArrayList<>();
+    public Domaine(ArrayList<Object> doms, int typeDomaine) {
+        this.doms = new ArrayList<>();
         this.doms.addAll(doms);
         this.typeDomaine = typeDomaine;
         tableType.add("int");
@@ -91,20 +91,20 @@ public class Domaine {
                 if (object.getClass().getSimpleName().equals("Double")) {
                     test = true;
                     break;
-                    
+
                 }
                 break;
             case "char":
                 if (object.getClass().getSimpleName().equals(type)) {
                     test = true;
-                
+
                     break;
                 }
                 break;
             case "varchar":
                 if (object.getClass().getSimpleName().equals("String")) {
                     test = true;
-                    
+
                     break;
                 }
                 break;
@@ -135,17 +135,21 @@ public class Domaine {
             default:
                 test = false;
                 break;
-            }
-            return test;
+        }
+        return test;
     }
 
-    boolean testType2(Object object){
+    boolean testType2(Object object) {
         for (Object dom : doms) {
             if (testByType(object, General.convertToString(dom)) == true) {
                 return true;
             }
         }
         return false;
+    }
+
+    boolean testType5(Object object){
+        return General.customContains(doms, object.getClass());
     }
 
     public boolean appartient(Object object) {
@@ -159,6 +163,26 @@ public class Domaine {
                 test = testType2(object);
                 break;
 
+            case 3:
+                test = doms.contains(object);
+                break;
+
+            case 5:
+                test = testType5(object);
+                break;
+
+            case 4:
+                ArrayList<Boolean> booleans = new ArrayList<>();
+                try {
+                    booleans.add(testRegex(object.toString()));
+                } finally {
+                    booleans.add(testType2(object));
+                    booleans.add(doms.contains(object));
+                    booleans.add(testType5(object));
+                }
+                test = booleans.contains(true);
+                break;
+
             default:
                 test = false;
                 break;
@@ -168,11 +192,17 @@ public class Domaine {
 
     @Override
     public boolean equals(Object obj) {
-        Domaine domaine= ((Domaine)obj);
+        Domaine domaine = ((Domaine) obj);
         if (domaine.typeDomaine == this.typeDomaine && this.doms.equals(domaine.doms)) {
             return true;
         }
         return false;
+    }
+
+    public static Domaine unionDomaine(Domaine domaine, Domaine domaine2) {
+        ArrayList<Object> doms = new ArrayList<>(domaine.getDom());
+        doms.addAll(domaine2.getDom());
+        return new Domaine(doms, 4);
     }
 
 }

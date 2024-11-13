@@ -62,4 +62,22 @@ public class Atribut {
         }
         return indexs;
     }
+
+    static Atribut unionAtribut(Atribut atribut, Atribut atribut2) {
+        String nom = atribut.nom + " " + atribut2.nom;
+        Domaine domaine = Domaine.unionDomaine(atribut.domaine, atribut2.domaine);
+        return new Atribut(nom, domaine);
+    }
+
+    public static ArrayList<Atribut> unionAtribus(ArrayList<Atribut> atributs, ArrayList<Atribut> atributs2)
+            throws Exception {
+        if (atributs.size() != atributs2.size()) {
+            throw new Exception("le nombre d'atribut doit etre egal");
+        }
+        ArrayList<Atribut> union = new ArrayList<>();
+        for (int i = 0; i < atributs.size(); i++) {
+            union.add(Atribut.unionAtribut(atributs.get(i), atributs2.get(i)));
+        }
+        return union;
+    }
 }
