@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Nuplet
@@ -73,5 +74,45 @@ public class Nuplet {
     public int getNumLigne(Object object) {
         int index = General.indexOfGeneric(this.values, object);
         return index;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        // Vérifie si les objets sont égaux (référence ou type incorrect)
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+
+        // Cast de l'objet à Nuplet
+        Nuplet other = (Nuplet) obj;
+
+        // Vérification de l'égalité des listes values
+        if (values == null) {
+            if (other.values != null) {
+                return false;
+            }
+        } else if (!values.equals(other.values)) {
+            return false;
+        }
+
+        // Vérification de l'égalité des listes atributs
+        if (atributs == null) {
+            if (other.atributs != null) {
+                return false;
+            }
+        } else if (!atributs.equals(other.atributs)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(values, atributs);
     }
 }

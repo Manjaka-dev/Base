@@ -18,6 +18,7 @@ public class Main {
         ens2.add("sandratra");
         ens2.add("miaritsoa");
         ens2.add("nyando");
+        ens2.add("test");
 
         ArrayList<Object> ens3 = new ArrayList<>();
         ens3.add("test");
@@ -45,7 +46,7 @@ public class Main {
         /* creation List data */
         ArrayList<Object> data1 = new ArrayList<>();
         data1.add(1);
-        data1.add("manjaka");
+        data1.add("test");
         ArrayList<Object> data2 = new ArrayList<>();
         data2.add(2);
         data2.add("mir");
