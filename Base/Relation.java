@@ -190,7 +190,9 @@ public class Relation {
         ArrayList<Atribut> atributs = Atribut.unionAtribus(relation.atributs, relation2.atributs);
         Relation intersection = new Relation(nom, atributs);
         for (Nuplet nuplet : relation.nuplets) {
+            nuplet.showNuplet();
             if (General.customContains(relation2.nuplets, nuplet)) {
+                System.out.println("test");
                 intersection.addValues(nuplet.values);
             }
         }
