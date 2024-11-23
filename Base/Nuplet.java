@@ -99,7 +99,6 @@ public class Nuplet {
             return false;
         }
 
-<<<<<<< HEAD
         // Vérification de l'égalité des listes atributs
         if (atributs == null) {
             if (other.atributs != null) {
@@ -108,9 +107,7 @@ public class Nuplet {
         } else if (!atributs.equals(other.atributs)) {
             return false;
         }
-
-=======
->>>>>>> 29be9ee (ajustement du domaine)
+        
         return true;
     }
 
