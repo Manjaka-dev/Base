@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -55,8 +56,8 @@ public class Atribut {
         return Objects.hash(nom, domaine);
     }
 
-    public static ArrayList<Integer> getIndex(ArrayList<Atribut> atributs, ArrayList<Atribut> atributs2) {
-        ArrayList<Integer> indexs = new ArrayList<>();
+    public static List<Integer> getIndex(List<Atribut> atributs, List<Atribut> atributs2) {
+        List<Integer> indexs = new ArrayList<>();
         for (Atribut atribut : atributs2) {
             indexs.add(General.indexOfGeneric(atributs, atribut));
         }
@@ -69,12 +70,12 @@ public class Atribut {
         return new Atribut(nom, domaine);
     }
 
-    public static ArrayList<Atribut> unionAtribus(ArrayList<Atribut> atributs, ArrayList<Atribut> atributs2)
+    public static List<Atribut> unionAtribus(List<Atribut> atributs, List<Atribut> atributs2)
             throws Exception {
         if (atributs.size() != atributs2.size()) {
             throw new Exception("le nombre d'atribut doit etre egal");
         }
-        ArrayList<Atribut> union = new ArrayList<>();
+        List<Atribut> union = new ArrayList<>();
         for (int i = 0; i < atributs.size(); i++) {
             union.add(Atribut.unionAtribut(atributs.get(i), atributs2.get(i)));
         }

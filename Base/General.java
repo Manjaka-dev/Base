@@ -6,7 +6,7 @@ import java.util.List;
  */
 public class General {
 
-    public static <T> boolean customContains(ArrayList<T> list, T target) {
+    public static <T> boolean customContains(List<T> list, T target) {
         for (T item : list) {
             if (item.equals(target)) { // Utilise equals pour comparer chaque élément
                 return true;
@@ -15,8 +15,8 @@ public class General {
         return false;
     }
 
-    public static <T, E> ArrayList<T> convertArrayList(List<E> list, Class<T> clazz) {
-        ArrayList<T> newList = new ArrayList<>();
+    public static <T, E> List<T> convertList(List<E> list, Class<T> clazz) {
+        List<T> newList = new ArrayList<>();
 
         for (E element : list) {
             if (clazz.isInstance(element)) { // Vérifie si l'élément est du type désiré
@@ -27,8 +27,8 @@ public class General {
         return newList;
     }
 
-    public static <T, E> ArrayList<T> removeDouble(ArrayList<E> list, Class<T> class1) {
-        ArrayList<T> objects = new ArrayList<>();
+    public static <T, E> List<T> removeDouble(List<E> list, Class<T> class1) {
+        List<T> objects = new ArrayList<>();
         // objects.add(class1.cast(list.getFirst()));
         for (Object li : list) {
             if (!objects.contains(class1.cast(li))) {
@@ -147,8 +147,8 @@ public class General {
         return status;
     }
 
-    public static <T, E> ArrayList<T> intersectArray(ArrayList<E> objects, ArrayList<E> objects2, Class<T> class1) {
-        ArrayList<T> inter = new ArrayList<>();
+    public static <T, E> List<T> intersectArray(List<E> objects, List<E> objects2, Class<T> class1) {
+        List<T> inter = new ArrayList<>();
         for (Object object : objects) {
             if (objects2.contains(object)) {
                 inter.add(class1.cast(object));
@@ -164,7 +164,7 @@ public class General {
         return inter;
     }
 
-    public static <T> int indexOfGeneric(ArrayList<T> list, T element) {
+    public static <T> int indexOfGeneric(List<T> list, T element) {
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).equals(element)) { // Vérifie si l'élément est égal
                 return i;

@@ -1,21 +1,21 @@
 import java.util.ArrayList;
-
+import java.util.List;
 /**
  * Relation
  */
 public class Relation {
 
-    ArrayList<Atribut> atributs;
-    ArrayList<Nuplet> nuplets;
+    List<Atribut> atributs;
+    List<Nuplet> nuplets;
     String nom;
 
-    public Relation(String nom, ArrayList<Atribut> atributs) {
+    public Relation(String nom, List<Atribut> atributs) {
         this.nom = nom;
         this.atributs = new ArrayList<>(atributs);
         nuplets = new ArrayList<Nuplet>();
     }
 
-    public void addValues(ArrayList<Object> values) throws Exception {
+    public void addValues(List<Object> values) throws Exception {
         Nuplet newNuplet = new Nuplet(atributs);
         int numAt = 0;
         for (Object object : values) {
@@ -39,9 +39,9 @@ public class Relation {
         System.out.println("\n\n");
     }
 
-    ArrayList<Atribut> getAtributByName(ArrayList<String> noms) {
-        noms = ((ArrayList<String>) General.removeDouble(noms, String.class));
-        ArrayList<Atribut> atribSelect = new ArrayList<>();
+    List<Atribut> getAtributByName(List<String> noms) {
+        noms = ((List<String>) General.removeDouble(noms, String.class));
+        List<Atribut> atribSelect = new ArrayList<>();
         for (String nom : noms) {
             for (Atribut atribut : this.atributs) {
                 if (atribut.nom == nom) {
@@ -62,8 +62,8 @@ public class Relation {
         return atribSelect;
     }
 
-    ArrayList<Integer> getIndexAtt(ArrayList<Atribut> selectatributs) {
-        ArrayList<Integer> index = new ArrayList<>();
+    List<Integer> getIndexAtt(List<Atribut> selectatributs) {
+        List<Integer> index = new ArrayList<>();
         for (Atribut sAtribut : selectatributs) {
             index.add(General.indexOfGeneric(this.atributs, sAtribut));
         }
@@ -75,10 +75,10 @@ public class Relation {
         return index;
     }
 
-    public Relation projection(ArrayList<String> noms) throws Exception {
-        ArrayList<Atribut> selectAtrib = getAtributByName(noms);
-        ArrayList<Integer> indexAtt = getIndexAtt(selectAtrib);
-        ArrayList<Atribut> newAtributs = new ArrayList<>();
+    public Relation projection(List<String> noms) throws Exception {
+        List<Atribut> selectAtrib = getAtributByName(noms);
+        List<Integer> indexAtt = getIndexAtt(selectAtrib);
+        List<Atribut> newAtributs = new ArrayList<>();
         for (Integer integer : indexAtt) {
             newAtributs.add(this.atributs.get(integer.intValue()));
         }
@@ -89,7 +89,7 @@ public class Relation {
         Relation relation = new Relation(temp, newAtributs);
 
         for (Integer integer : indexAtt) {
-            ArrayList<Object> val = new ArrayList<>();
+            List<Object> val = new ArrayList<>();
             for (Nuplet nuplet : this.nuplets) {
                 val.add(nuplet.getLigne(integer.intValue()));
             }
@@ -114,7 +114,7 @@ public class Relation {
         Integer index = getIndexAtt(atribut);
 
         for (Nuplet nuplet : this.nuplets) {
-            ArrayList<Object> values = new ArrayList<>();
+            List<Object> values = new ArrayList<>();
             if (General.operate(nuplet.values.get(index.intValue()), condition.getOperation(), condition.getVal())) {
                 for (Object value : nuplet.values) {
                     values.add(value);
@@ -165,7 +165,7 @@ public class Relation {
             throw new Exception("les relation doivent avoir le meme nombre d'atribut");
         }
         String nom = relation.nom + " union " + relation2.nom;
-        ArrayList<Atribut> atributs = Atribut.unionAtribus(relation.atributs, relation2.atributs);
+        List<Atribut> atributs = Atribut.unionAtribus(relation.atributs, relation2.atributs);
         Relation union = new Relation(nom, atributs);
         for (Nuplet nuplet : relation.nuplets) {
             union.addValues(nuplet.getValues());
@@ -187,7 +187,7 @@ public class Relation {
             throw new Exception("le nombre d'atribut doit etre egal");
         }
         String nom = "intersection entre " + relation.nom + " " + relation2.nom;
-        ArrayList<Atribut> atributs = Atribut.unionAtribus(relation.atributs, relation2.atributs);
+        List<Atribut> atributs = Atribut.unionAtribus(relation.atributs, relation2.atributs);
         Relation intersection = new Relation(nom, atributs);
         for (Nuplet nuplet : relation.nuplets) {
             if (General.customContains(relation2.nuplets, nuplet)) {
@@ -208,7 +208,7 @@ public class Relation {
             throw new Exception("le nombre d'atribut doit etre egal");
         }
         String nom = "intersection entre " + relation.nom + " " + relation2.nom;
-        ArrayList<Atribut> atributs = Atribut.unionAtribus(relation.atributs, relation2.atributs);
+        List<Atribut> atributs = Atribut.unionAtribus(relation.atributs, relation2.atributs);
         Relation intersection = new Relation(nom, atributs);
         for (Nuplet nuplet : relation.nuplets) {
             if (!General.customContains(relation2.nuplets, nuplet)) {
@@ -219,7 +219,7 @@ public class Relation {
     }
 
     public static Relation produitCartesien(Relation relation, Relation relation2) throws Exception {
-        ArrayList<Atribut> atributs = new ArrayList<>();
+        List<Atribut> atributs = new ArrayList<>();
         for (Atribut atribut : relation.atributs) {
             atributs.add(atribut);
         }
@@ -232,7 +232,7 @@ public class Relation {
             max = relation2.nuplets.size();
         }
         for (int i = 0; i < max; i++) {
-            ArrayList<Object> temp = new ArrayList<>();
+            List<Object> temp = new ArrayList<>();
             if (relation.nuplets.get(i) != null) {
                 temp.addAll(relation.nuplets.get(i).values);
             } else {
@@ -241,7 +241,7 @@ public class Relation {
                 }
             }
             for (int j = 0; j < relation2.nuplets.size(); j++) {
-                ArrayList<Object> temp2 = new ArrayList<>(temp);
+                List<Object> temp2 = new ArrayList<>(temp);
                 if (relation2.nuplets.get(j) != null) {
                     temp2.addAll(relation2.nuplets.get(j).values);
                 } else {
@@ -275,6 +275,11 @@ public class Relation {
         }
         return select;
     }
+
+    // public Relation NaturalJoin(Relation relation, List<String> atributsJoin) throws Exception {
+    //     Relation relation2 = produitCartesien(this, relation);
+        
+    // }
 
     public Relation thetaJointure(Condition condition, Relation relation) throws Exception {
         Relation relation2 = produitCartesien(this, relation);

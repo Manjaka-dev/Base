@@ -1,15 +1,16 @@
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Domaine
  */
 public class Domaine {
 
-    ArrayList<Object> doms;
+    List<Object> doms;
     int typeDomaine; // vas de 1 a 4
-    private ArrayList<String> tableType = new ArrayList<>();
+    private List<String> tableType = new ArrayList<>();
 
-    public Domaine(ArrayList<Object> doms, int typeDomaine) {
+    public Domaine(List<Object> doms, int typeDomaine) {
         this.doms = new ArrayList<>();
         this.doms.addAll(doms);
         this.typeDomaine = typeDomaine;
@@ -32,11 +33,11 @@ public class Domaine {
         this.typeDomaine = typeDomaine;
     }
 
-    public ArrayList<Object> getDom() {
+    public List<Object> getDom() {
         return doms;
     }
 
-    public void setDom(ArrayList<Object> doms) {
+    public void setDom(List<Object> doms) {
         this.doms = doms;
     }
 
@@ -172,7 +173,7 @@ public class Domaine {
                 break;
 
             case 4:
-                ArrayList<Boolean> booleans = new ArrayList<>();
+                List<Boolean> booleans = new ArrayList<>();
                 try {
                     booleans.add(testRegex(object.toString()));
                 } finally {
@@ -200,7 +201,7 @@ public class Domaine {
     }
 
     public static Domaine unionDomaine(Domaine domaine, Domaine domaine2) {
-        ArrayList<Object> doms = new ArrayList<>(domaine.getDom());
+        List<Object> doms = new ArrayList<>(domaine.getDom());
         doms.addAll(domaine2.getDom());
         return new Domaine(doms, 4);
     }

@@ -1,22 +1,23 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class GestCond {
-    ArrayList<Condition> conditions;
-    ArrayList<Integer> connecteur;
+    List<Condition> conditions;
+    List<Integer> connecteur;
 
-    public ArrayList<Condition> getConditions() {
+    public List<Condition> getConditions() {
         return conditions;
     }
 
-    public void setConditions(ArrayList<Condition> conditions) {
+    public void setConditions(List<Condition> conditions) {
         this.conditions = conditions;
     }
 
-    public ArrayList<Integer> getConnecteur() {
+    public List<Integer> getConnecteur() {
         return connecteur;
     }
 
-    public void setConnecteur(ArrayList<Integer> connecteur) {
+    public void setConnecteur(List<Integer> connecteur) {
         this.connecteur = connecteur;
     }
 

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -6,23 +7,23 @@ import java.util.Objects;
  */
 public class Nuplet {
 
-    ArrayList<Object> values;
-    ArrayList<Atribut> atributs;
+    List<Object> values;
+    List<Atribut> atributs;
 
-    public Nuplet(ArrayList<Atribut> atributs) {
+    public Nuplet(List<Atribut> atributs) {
         this.values = new ArrayList<>();
         this.atributs = new ArrayList<>(atributs);
     }
 
-    public void setAtributs(ArrayList<Atribut> atributs) {
+    public void setAtributs(List<Atribut> atributs) {
         this.atributs = atributs;
     }
 
-    public ArrayList<Object> getValues() {
+    public List<Object> getValues() {
         return values;
     }
 
-    public ArrayList<Atribut> getAtributs() {
+    public List<Atribut> getAtributs() {
         return atributs;
     }
 
@@ -46,7 +47,7 @@ public class Nuplet {
         }
     }
 
-    public static boolean nupletContains(ArrayList<Nuplet> nuplets, Nuplet nuplet) {
+    public static boolean nupletContains(List<Nuplet> nuplets, Nuplet nuplet) {
         if (nuplets.size() == 0)
             return false;
         for (Nuplet nuplet2 : nuplets) {
