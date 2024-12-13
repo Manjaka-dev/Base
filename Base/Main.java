@@ -90,17 +90,29 @@ public class Main {
         relation2.showRelation();
 
         try {
-            Relation union = Relation.union(relation1, relation2);
-            union.showRelation();
+            // Relation union = Relation.union(relation1, relation2);
+            // union.showRelation();
 
-            Relation produit = Relation.produitCartesien(relation1, relation2);
-            produit.showRelation();
+            // Relation produit = Relation.produitCartesien(relation1, relation2);
+            // produit.showRelation();
 
-            Relation jointure = relation1.thetaJointure(new Condition("id1", 1, "id2"), relation2);
-            jointure.showRelation();
+            // Relation jointure = relation1.thetaJointure(new Condition("id1", 1, "id2"), relation2);
+            // jointure.showRelation();
 
-            Relation intersection = Relation.intersection(relation1, relation2);
-            intersection.showRelation();
+            // Relation intersection = Relation.intersection(relation1, relation2);
+            // intersection.showRelation();
+
+            // Relation test = relation1.thetaJointure(new Condition("id1", 1, "id2"), relation2);
+            // test.showRelation();
+
+            // Relation leftJoin = relation1.righttJoin(new Condition("id1", 1, "id2"), relation2);
+            // leftJoin.showRelation();
+
+            // relation1.rightJoin(new Condition("id1", 1, "id2"), relation2);
+
+            Relation leftJoin = relation1.leftJoin(new Condition("id1", 1, "id2"), relation2);
+            leftJoin.showRelation();
+            
         } catch (Exception e) {
             e.printStackTrace();
         }

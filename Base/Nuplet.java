@@ -30,8 +30,15 @@ public class Nuplet {
     public boolean customEquals(Nuplet nuplet) {
         int count = 0;
         for (int i = 0; i < this.values.size(); i++) {
-            if (this.values.get(i).equals(nuplet.values.get(i)))
-                count++;
+            if (this.values.get(i) == null || nuplet.values.get(i) == null) {
+                if (this.values.get(i) == null && nuplet.values.get(i) == null) {
+                    count++;
+                }
+            } else {
+                if (this.values.get(i).equals(nuplet.values.get(i)) ) {
+                    count++;
+                }
+            }
         }
 
         if (count == nuplet.values.size())

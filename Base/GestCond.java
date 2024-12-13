@@ -27,13 +27,15 @@ public class GestCond {
         connecteur = new ArrayList<>();
     }
 
-    public void and(Condition condition) {
+    public GestCond and(Condition condition) {
         this.conditions.add(condition);
         this.connecteur.add(1);
+        return this;
     }
 
-    public void or(Condition condition) {
+    public GestCond or(Condition condition) {
         this.conditions.add(condition);
         this.connecteur.add(2);
+        return this;
     }
 }

@@ -160,7 +160,6 @@ public class General {
             }
         }
         inter = removeDouble(inter, class1);
-        System.out.println(inter.size());
         return inter;
     }
 
@@ -178,6 +177,16 @@ public class General {
             return "null"; // Si l'objet est null, renvoie "null"
         }
         return String.valueOf(obj); // Utilise String.valueOf pour convertir l'objet
+    }
+
+    public static <T> List<T> getDouble(List<T> list1, List<T> list2){
+        List<T> same = new ArrayList<>();
+        for (T object : list1) {
+            if (customContains(list2, object)) {
+                same.add(object);
+            }
+        }
+        return same;
     }
 
 }

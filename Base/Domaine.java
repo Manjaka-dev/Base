@@ -75,6 +75,9 @@ public class Domaine {
 
     boolean testByType(Object object, String type) {
         boolean test = false;
+        if (object == null) {
+            return true;
+        }
         switch (type) {
             case "int":
                 if (object.getClass().getSimpleName().equals("Integer")) {
@@ -154,7 +157,7 @@ public class Domaine {
     }
 
     public boolean appartient(Object object) {
-        boolean test = true;
+        boolean test = false;
         switch (this.typeDomaine) {
             case 1:
                 test = testRegex(object.toString());
@@ -187,6 +190,9 @@ public class Domaine {
             default:
                 test = false;
                 break;
+        }
+        if (object == null) {
+            test = true;
         }
         return test;
     }

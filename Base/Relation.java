@@ -218,7 +218,15 @@ public class Relation {
         return intersection;
     }
 
-    public static Relation produitCartesien(Relation relation, Relation relation2) throws Exception {
+    public static Relation produitCartesien(Relation relation1, Relation relation12) throws Exception {
+
+        Relation relation = relation1;
+        Relation relation2 = relation12;
+        if (relation.nuplets.size() < relation2.nuplets.size()) {
+            relation = relation12;
+            relation2 = relation1;
+        }
+
         List<Atribut> atributs = new ArrayList<>();
         for (Atribut atribut : relation.atributs) {
             atributs.add(atribut);
@@ -275,12 +283,7 @@ public class Relation {
         }
         return select;
     }
-
-    // public Relation NaturalJoin(Relation relation, List<String> atributsJoin) throws Exception {
-    //     Relation relation2 = produitCartesien(this, relation);
-        
-    // }
-
+    
     public Relation thetaJointure(Condition condition, Relation relation) throws Exception {
         Relation relation2 = produitCartesien(this, relation);
         String nom = "jointure de " + this.nom + " et " + relation.nom + " a " + condition.toString();
@@ -291,7 +294,6 @@ public class Relation {
 
         Atribut atribut2 = relation2.getAtributByName(condition.getVal().toString());
         Integer index2 = relation2.getIndexAtt(atribut2);
-        System.out.println(index2);
 
         for (Nuplet nuplet : relation2.nuplets) {
             if (General.operate(nuplet.values.get(index), condition.operation, nuplet.values.get(index2))) {
@@ -300,6 +302,44 @@ public class Relation {
         }
 
         return jointure;
+    }
+
+    boolean checkSameCell(Object object, int indAtt){
+        for (Nuplet nuplet : this.nuplets) {
+            if (nuplet.values.get(indAtt).equals(object)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Relation rightJoin (Condition condition, Relation relation) throws Exception{
+        Relation thetajointure = this.thetaJointure(condition, relation);
+
+        Atribut atribut1 = relation.getAtributByName(condition.val.toString());
+        Integer indAtt1 = relation.getIndexAtt(atribut1);
+
+        Atribut atribut2 = thetajointure.getAtributByName(condition.val.toString());
+        Integer indAtt2 = thetajointure.getIndexAtt(atribut2);
+
+        for (Nuplet nuplet : relation.nuplets) {
+            if (!thetajointure.checkSameCell(nuplet.values.get(indAtt1), indAtt2)) {
+                ArrayList<Object> nulle = new ArrayList<>();
+                for (Object object : nuplet.values) {
+                    nulle.add(object);
+                }
+                for (int i = 0; i < this.atributs.size(); i++) {
+                    nulle.add(null);
+                }
+                System.out.println(nulle);
+                thetajointure.addValues(nulle);
+            }
+        }
+        return thetajointure;
+    }
+
+    public Relation leftJoin (Condition condition, Relation relation) throws Exception{
+        return relation.rightJoin(new Condition(condition.val.toString(), condition.operation, condition.nomAtt), this);
     }
 
 }
